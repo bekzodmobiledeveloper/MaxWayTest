@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:test_burger/core/config/theme/ui_helpers.dart';
 import 'package:test_burger/pages/data/foods.dart';
+import 'package:test_burger/pages/widgets/app_bar_item.dart';
+import '../data/add_counter.dart';
 
-class ModelFood extends StatefulWidget {
-  const ModelFood({Key? key}) : super(key: key);
 
-  @override
-  State<ModelFood> createState() => _ModelFoodState();
-}
+class ModelFood extends StatelessWidget {
+  ModelFood({Key? key, required this.increment}) : super(key: key);
 
-class _ModelFoodState extends State<ModelFood> {
+  AddCounter counter = AddCounter.instance;
+  Function increment;
   static List<Foods> foods = [
     Foods(
         title: "Gavaya",
@@ -88,12 +88,18 @@ class _ModelFoodState extends State<ModelFood> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
-                            "45,000 UZS",
+                             "45,000 UZS",
                             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, fontFamily: "Inter-Regular.ttf"),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Image.asset("assets/images/add.png"),
+                          TextButton(
+                            onPressed: () {
+                              counter.increment();
+                              increment();
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Image.asset("assets/images/add.png"),
+                            ),
                           )
                         ],
                       )

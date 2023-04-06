@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:test_burger/core/config/theme/ui_helpers.dart';
 import 'package:test_burger/pages/data/burger.dart';
 
-class ModelBurger extends StatefulWidget {
-  const ModelBurger({Key? key}) : super(key: key);
+import '../data/add_counter.dart';
 
-  @override
-  State<ModelBurger> createState() => _ModelBurgerState();
-}
+class ModelBurger extends StatelessWidget {
+   ModelBurger({Key? key, required this.increment}) : super(key: key);
 
-class _ModelBurgerState extends State<ModelBurger> {
+  AddCounter counter = AddCounter.instance;
+  Function increment;
+
   static List<Burger> burger = [
     Burger(
         title: "Cheeseburger",
@@ -91,9 +91,15 @@ class _ModelBurgerState extends State<ModelBurger> {
                             "45,000 UZS",
                             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, fontFamily: "Inter-Regular.ttf"),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Image.asset("assets/images/add.png"),
+                          TextButton(
+                            onPressed: () {
+                              counter.increment();
+                              increment();
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Image.asset("assets/images/add.png"),
+                            ),
                           )
                         ],
                       )
@@ -108,3 +114,4 @@ class _ModelBurgerState extends State<ModelBurger> {
     ]);
   }
 }
+

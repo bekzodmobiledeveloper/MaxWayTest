@@ -11,6 +11,8 @@ import 'package:test_burger/pages/widgets/model_food.dart';
 import 'package:test_burger/pages/widgets/phone_tem.dart';
 import 'package:test_burger/pages/widgets/second_appbar_item.dart';
 
+import 'data/add_counter.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -19,11 +21,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final AddCounter count = AddCounter.instance;
+
+  void setStateCount() {
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: AppBarItem(),
+        title: AppBarItem(
+          count: count,
+        ),
         backgroundColor: Colors.white,
       ),
       body: SafeArea(
@@ -54,7 +64,9 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              const ModelFood(),
+              ModelFood(
+                increment: () => setStateCount(),
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: Container(
@@ -88,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              const ModelBurger(),
+               ModelBurger(increment:() => setStateCount() ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: Container(
@@ -122,7 +134,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              const ModelCombo(),
+               ModelCombo(increment: () => setStateCount()),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0),
                 child: Container(
@@ -156,7 +168,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              const ModelCola(),
+               ModelCola(increment: () => setStateCount(),),
               const PhoneItem(),
               verticalSpace25,
               const Padding(

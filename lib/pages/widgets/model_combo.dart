@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:test_burger/core/config/theme/ui_helpers.dart';
 import 'package:test_burger/pages/data/combo.dart';
 
-class ModelCombo extends StatefulWidget {
-  const ModelCombo({Key? key}) : super(key: key);
+import '../data/add_counter.dart';
 
-  @override
-  State<ModelCombo> createState() => _ModelComboState();
-}
+class ModelCombo extends StatelessWidget {
+   ModelCombo({Key? key, required this.increment}) : super(key: key);
 
-class _ModelComboState extends State<ModelCombo> {
+  AddCounter counter = AddCounter.instance;
+  Function increment;
   static List<Combo> combo = [
     Combo(
         title: "Combo-1",
@@ -91,9 +90,15 @@ class _ModelComboState extends State<ModelCombo> {
                             "50,000 UZS",
                             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, fontFamily: "Inter-Regular.ttf"),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Image.asset("assets/images/add.png"),
+                          TextButton(
+                            onPressed: () {
+                              counter.increment();
+                              increment();
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Image.asset("assets/images/add.png"),
+                            ),
                           )
                         ],
                       )
@@ -108,3 +113,4 @@ class _ModelComboState extends State<ModelCombo> {
     ]);
   }
 }
+

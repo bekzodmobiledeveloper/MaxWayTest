@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:test_burger/core/config/theme/ui_helpers.dart';
 import 'package:test_burger/pages/data/cola.dart';
 
-class ModelCola extends StatefulWidget {
-  const ModelCola({Key? key}) : super(key: key);
+import '../data/add_counter.dart';
 
-  @override
-  State<ModelCola> createState() => _ModelColaState();
-}
+class ModelCola extends StatelessWidget {
+   ModelCola({Key? key, required this.increment}) : super(key: key);
 
-class _ModelColaState extends State<ModelCola> {
+   AddCounter counter = AddCounter.instance;
+   Function increment;
   static List<Cola> cola = [
     Cola(
         title: "Sprite 1L",
@@ -82,11 +81,16 @@ class _ModelColaState extends State<ModelCola> {
                             "15,000 UZS",
                             style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20, fontFamily: "Inter-Regular.ttf"),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(16.0),
-                            child: Image.asset("assets/images/add.png"),
-                          )
-                        ],
+                          TextButton(
+                            onPressed: () {
+                              counter.increment();
+                              increment();
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Image.asset("assets/images/add.png"),
+                            ),
+                          )                        ],
                       )
                     ],
                   ),
@@ -99,3 +103,4 @@ class _ModelColaState extends State<ModelCola> {
     ]);
   }
 }
+

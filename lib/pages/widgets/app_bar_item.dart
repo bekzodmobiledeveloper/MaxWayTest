@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../data/add_counter.dart';
 
 class AppBarItem extends StatelessWidget {
-  const AppBarItem({Key? key}) : super(key: key);
+   AddCounter count;
+
+  AppBarItem({Key? key, required this.count}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +33,35 @@ class AppBarItem extends StatelessWidget {
             'Filliallar',
             style: GoogleFonts.openSans(fontSize: 12.0, color: Colors.black54, fontWeight: FontWeight.normal),
           ),
-          Image(
-            image: AssetImage(
-              "assets/images/savat.png",
-            ),
-            width: 40,
-            height: 40,
+          Stack(
+            alignment: Alignment.topRight,
+            children: [
+              const Image(
+                image: AssetImage(
+                  "assets/images/qulf.png",
+                ),
+                width: 50,
+                height: 50,
+              ),
+              Stack(
+                alignment: Alignment.center,
+                children: [
+                  const Image(
+                    image: AssetImage(
+                      "assets/images/oval.png",
+                    ),
+                    width: 30,
+                    height: 30,
+                  ),
+                  Text(
+                    '${count.count}',
+                    style: GoogleFonts.openSans(fontSize: 14.0, color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+            ],
           ),
-          Image(
+          const Image(
             image: AssetImage(
               "assets/images/menu.png",
             ),
